@@ -1,0 +1,26 @@
+{
+  "builders": [
+    {
+      "name": "ubuntu-docker",
+      "type": "docker",
+      "image": "alpine:3.9",
+      "commit": "true",
+      "changes": [
+        "ENTRYPOINT [\"\"]"
+      ]
+    }
+  ],
+  "provisioners": [
+    {
+      "type": "shell",
+      "inline": ["echo 'Hello World'>/test.txt"]
+    }
+  ],
+  "post-processors": [
+    {
+      "type": "docker-tag",
+      "repository": "quay.io/brucellino/terratest-test-hello",
+      "tag": "latest"
+    }
+  ]
+}
